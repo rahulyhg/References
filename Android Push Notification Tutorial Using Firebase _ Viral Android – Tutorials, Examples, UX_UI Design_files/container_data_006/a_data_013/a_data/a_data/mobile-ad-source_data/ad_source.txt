@@ -1,0 +1,2691 @@
+(function(){function g() {
+  return function() {
+  }
+}
+function aa(a) {
+  return function() {
+    return this[a]
+  }
+}
+var k, ba = ba || {}, l = this;
+function ca(a) {
+  a = a.split(".");
+  for(var b = l, c;c = a.shift();) {
+    if(null != b[c]) {
+      b = b[c]
+    }else {
+      return null
+    }
+  }
+  return b
+}
+function da() {
+}
+function n(a) {
+  var b = typeof a;
+  if("object" == b) {
+    if(a) {
+      if(a instanceof Array) {
+        return"array"
+      }
+      if(a instanceof Object) {
+        return b
+      }
+      var c = Object.prototype.toString.call(a);
+      if("[object Window]" == c) {
+        return"object"
+      }
+      if("[object Array]" == c || "number" == typeof a.length && "undefined" != typeof a.splice && "undefined" != typeof a.propertyIsEnumerable && !a.propertyIsEnumerable("splice")) {
+        return"array"
+      }
+      if("[object Function]" == c || "undefined" != typeof a.call && "undefined" != typeof a.propertyIsEnumerable && !a.propertyIsEnumerable("call")) {
+        return"function"
+      }
+    }else {
+      return"null"
+    }
+  }else {
+    if("function" == b && "undefined" == typeof a.call) {
+      return"object"
+    }
+  }
+  return b
+}
+function ea(a) {
+  var b = n(a);
+  return"array" == b || "object" == b && "number" == typeof a.length
+}
+function p(a) {
+  return"string" == typeof a
+}
+var fa = "closure_uid_" + (1E9 * Math.random() >>> 0), ga = 0;
+function ha(a, b, c) {
+  return a.call.apply(a.bind, arguments)
+}
+function ja(a, b, c) {
+  if(!a) {
+    throw Error();
+  }
+  if(2 < arguments.length) {
+    var d = Array.prototype.slice.call(arguments, 2);
+    return function() {
+      var c = Array.prototype.slice.call(arguments);
+      Array.prototype.unshift.apply(c, d);
+      return a.apply(b, c)
+    }
+  }
+  return function() {
+    return a.apply(b, arguments)
+  }
+}
+function q(a, b, c) {
+  q = Function.prototype.bind && -1 != Function.prototype.bind.toString().indexOf("native code") ? ha : ja;
+  return q.apply(null, arguments)
+}
+var ka = Date.now || function() {
+  return+new Date
+};
+function r(a, b) {
+  var c = a.split("."), d = l;
+  c[0] in d || !d.execScript || d.execScript("var " + c[0]);
+  for(var e;c.length && (e = c.shift());) {
+    c.length || void 0 === b ? d = d[e] ? d[e] : d[e] = {} : d[e] = b
+  }
+}
+function s(a, b) {
+  function c() {
+  }
+  c.prototype = b.prototype;
+  a.Qa = b.prototype;
+  a.prototype = new c
+}
+;function la() {
+  for(var a = window.self, b = 0, c = "";a !== window.top && a.parent;) {
+    try {
+      if(a.parent && a.parent.location && !a.parent.location.href) {
+        throw"HandleSafari";
+      }
+    }catch(d) {
+      if(c = c || a, 2 > b) {
+        b++
+      }else {
+        break
+      }
+    }
+    a = a.parent
+  }
+  c = c || a;
+  a = (a = c.document.referrer.match(/[^?]+/)) ? a[0] : "";
+  a = a.slice(0, 128);
+  this.Lc = b;
+  this.Mc = c.location.hostname;
+  this.Nc = a;
+  this.Eb = c.location.href
+}
+la.prototype.Ia = aa("Eb");
+function ma(a) {
+  Error.captureStackTrace ? Error.captureStackTrace(this, ma) : this.stack = Error().stack || "";
+  a && (this.message = String(a))
+}
+s(ma, Error);
+ma.prototype.name = "CustomError";
+var na;
+function oa(a, b) {
+  for(var c = a.split("%s"), d = "", e = Array.prototype.slice.call(arguments, 1);e.length && 1 < c.length;) {
+    d += c.shift() + e.shift()
+  }
+  return d + c.join("%s")
+}
+function pa(a) {
+  return a.replace(/^[\s\xa0]+|[\s\xa0]+$/g, "")
+}
+function qa(a) {
+  if(!ra.test(a)) {
+    return a
+  }
+  -1 != a.indexOf("\x26") && (a = a.replace(sa, "\x26amp;"));
+  -1 != a.indexOf("\x3c") && (a = a.replace(ta, "\x26lt;"));
+  -1 != a.indexOf("\x3e") && (a = a.replace(ua, "\x26gt;"));
+  -1 != a.indexOf('"') && (a = a.replace(va, "\x26quot;"));
+  return a
+}
+var sa = /&/g, ta = /</g, ua = />/g, va = /\"/g, ra = /[&<>\"]/;
+function wa(a, b) {
+  b.unshift(a);
+  ma.call(this, oa.apply(null, b));
+  b.shift();
+  this.Rc = a
+}
+s(wa, ma);
+wa.prototype.name = "AssertionError";
+function xa(a, b) {
+  throw new wa("Failure" + (a ? ": " + a : ""), Array.prototype.slice.call(arguments, 1));
+}
+;var t = Array.prototype, ya = t.indexOf ? function(a, b, c) {
+  return t.indexOf.call(a, b, c)
+} : function(a, b, c) {
+  c = null == c ? 0 : 0 > c ? Math.max(0, a.length + c) : c;
+  if(p(a)) {
+    return p(b) && 1 == b.length ? a.indexOf(b, c) : -1
+  }
+  for(;c < a.length;c++) {
+    if(c in a && a[c] === b) {
+      return c
+    }
+  }
+  return-1
+}, u = t.forEach ? function(a, b, c) {
+  t.forEach.call(a, b, c)
+} : function(a, b, c) {
+  for(var d = a.length, e = p(a) ? a.split("") : a, f = 0;f < d;f++) {
+    f in e && b.call(c, e[f], f, a)
+  }
+}, za = t.filter ? function(a, b, c) {
+  return t.filter.call(a, b, c)
+} : function(a, b, c) {
+  for(var d = a.length, e = [], f = 0, h = p(a) ? a.split("") : a, m = 0;m < d;m++) {
+    if(m in h) {
+      var y = h[m];
+      b.call(c, y, m, a) && (e[f++] = y)
+    }
+  }
+  return e
+};
+function Aa(a) {
+  var b;
+  a: {
+    b = Ba;
+    for(var c = a.length, d = p(a) ? a.split("") : a, e = 0;e < c;e++) {
+      if(e in d && b.call(void 0, d[e], e, a)) {
+        b = e;
+        break a
+      }
+    }
+    b = -1
+  }
+  return 0 > b ? null : p(a) ? a.charAt(b) : a[b]
+}
+function Ca(a, b) {
+  var c = ya(a, b), d;
+  (d = 0 <= c) && t.splice.call(a, c, 1);
+  return d
+}
+function Da(a) {
+  return t.concat.apply(t, arguments)
+}
+function Ea(a) {
+  var b = a.length;
+  if(0 < b) {
+    for(var c = Array(b), d = 0;d < b;d++) {
+      c[d] = a[d]
+    }
+    return c
+  }
+  return[]
+}
+function Fa(a, b) {
+  for(var c = 1;c < arguments.length;c++) {
+    var d = arguments[c], e;
+    if("array" == n(d) || (e = ea(d)) && Object.prototype.hasOwnProperty.call(d, "callee")) {
+      a.push.apply(a, d)
+    }else {
+      if(e) {
+        for(var f = a.length, h = d.length, m = 0;m < h;m++) {
+          a[f + m] = d[m]
+        }
+      }else {
+        a.push(d)
+      }
+    }
+  }
+}
+;var v, Ga, Ha, Ia;
+function Ja() {
+  return l.navigator ? l.navigator.userAgent : null
+}
+Ia = Ha = Ga = v = !1;
+var Ka;
+if(Ka = Ja()) {
+  var La = l.navigator;
+  v = 0 == Ka.lastIndexOf("Opera", 0);
+  Ga = !v && (-1 != Ka.indexOf("MSIE") || -1 != Ka.indexOf("Trident"));
+  Ha = !v && -1 != Ka.indexOf("WebKit");
+  Ia = !v && !Ha && !Ga && "Gecko" == La.product
+}
+var Ma = v, w = Ga, z = Ia, A = Ha, Na = l.navigator, Oa = -1 != (Na && Na.platform || "").indexOf("Mac");
+function Pa() {
+  var a = l.document;
+  return a ? a.documentMode : void 0
+}
+var Qa;
+a: {
+  var Ra = "", Sa;
+  if(Ma && l.opera) {
+    var Ta = l.opera.version, Ra = "function" == typeof Ta ? Ta() : Ta
+  }else {
+    if(z ? Sa = /rv\:([^\);]+)(\)|;)/ : w ? Sa = /\b(?:MSIE|rv)[: ]([^\);]+)(\)|;)/ : A && (Sa = /WebKit\/(\S+)/), Sa) {
+      var Ua = Sa.exec(Ja()), Ra = Ua ? Ua[1] : ""
+    }
+  }
+  if(w) {
+    var Va = Pa();
+    if(Va > parseFloat(Ra)) {
+      Qa = String(Va);
+      break a
+    }
+  }
+  Qa = Ra
+}
+var Wa = {};
+function B(a) {
+  var b;
+  if(!(b = Wa[a])) {
+    b = 0;
+    for(var c = pa(String(Qa)).split("."), d = pa(String(a)).split("."), e = Math.max(c.length, d.length), f = 0;0 == b && f < e;f++) {
+      var h = c[f] || "", m = d[f] || "", y = RegExp("(\\d*)(\\D*)", "g"), ia = RegExp("(\\d*)(\\D*)", "g");
+      do {
+        var x = y.exec(h) || ["", "", ""], E = ia.exec(m) || ["", "", ""];
+        if(0 == x[0].length && 0 == E[0].length) {
+          break
+        }
+        b = ((0 == x[1].length ? 0 : parseInt(x[1], 10)) < (0 == E[1].length ? 0 : parseInt(E[1], 10)) ? -1 : (0 == x[1].length ? 0 : parseInt(x[1], 10)) > (0 == E[1].length ? 0 : parseInt(E[1], 10)) ? 1 : 0) || ((0 == x[2].length) < (0 == E[2].length) ? -1 : (0 == x[2].length) > (0 == E[2].length) ? 1 : 0) || (x[2] < E[2] ? -1 : x[2] > E[2] ? 1 : 0)
+      }while(0 == b)
+    }
+    b = Wa[a] = 0 <= b
+  }
+  return b
+}
+var Xa = l.document, Ya = Xa && w ? Pa() || ("CSS1Compat" == Xa.compatMode ? parseInt(Qa, 10) : 5) : void 0;
+var Za = !z && !w || w && w && 9 <= Ya || z && B("1.9.1"), $a = w && !B("9");
+function ab(a) {
+  var b = [], c = 0, d;
+  for(d in a) {
+    b[c++] = a[d]
+  }
+  return b
+}
+function bb(a) {
+  var b = [], c = 0, d;
+  for(d in a) {
+    b[c++] = d
+  }
+  return b
+}
+var cb = "constructor hasOwnProperty isPrototypeOf propertyIsEnumerable toLocaleString toString valueOf".split(" ");
+function db(a, b) {
+  for(var c, d, e = 1;e < arguments.length;e++) {
+    d = arguments[e];
+    for(c in d) {
+      a[c] = d[c]
+    }
+    for(var f = 0;f < cb.length;f++) {
+      c = cb[f], Object.prototype.hasOwnProperty.call(d, c) && (a[c] = d[c])
+    }
+  }
+}
+;function C(a) {
+  return Za && void 0 != a.children ? a.children : za(a.childNodes, function(a) {
+    return 1 == a.nodeType
+  })
+}
+var eb = {SCRIPT:1, STYLE:1, HEAD:1, IFRAME:1, OBJECT:1}, fb = {IMG:" ", BR:"\n"};
+function gb(a, b, c) {
+  if(!(a.nodeName in eb)) {
+    if(3 == a.nodeType) {
+      c ? b.push(String(a.nodeValue).replace(/(\r\n|\r|\n)/g, "")) : b.push(a.nodeValue)
+    }else {
+      if(a.nodeName in fb) {
+        b.push(fb[a.nodeName])
+      }else {
+        for(a = a.firstChild;a;) {
+          gb(a, b, c), a = a.nextSibling
+        }
+      }
+    }
+  }
+}
+function D(a) {
+  this.S = a || l.document || document
+}
+D.prototype.createElement = function(a) {
+  return this.S.createElement(a)
+};
+D.prototype.appendChild = function(a, b) {
+  a.appendChild(b)
+};
+D.prototype.Wa = C;
+D.prototype.d = function(a) {
+  if($a && "innerText" in a) {
+    a = a.innerText.replace(/(\r\n|\r|\n)/g, "\n")
+  }else {
+    var b = [];
+    gb(a, b, !0);
+    a = b.join("")
+  }
+  a = a.replace(/ \xAD /g, " ").replace(/\xAD/g, "");
+  a = a.replace(/\u200B/g, "");
+  $a || (a = a.replace(/ +/g, " "));
+  " " != a && (a = a.replace(/^\s*/, ""));
+  return a
+};
+w && B(8);
+var F = {data:{}};
+F.data.va = {ua:{Wc:!0}, Ab:{kc:!0}, Bb:{kc:!0}, Db:{Yc:!0}, vb:{Vc:!0}, xb:{Uc:!0}, Ta:{Xc:!0}};
+F.data.h = function() {
+  throw Error("Do not instantiate directly");
+};
+F.data.h.prototype.Oc = null;
+F.data.h.prototype.toString = aa("content");
+F.Cb = !1;
+F.Tc = function(a, b, c, d) {
+  a.innerHTML = F.Ca(b(c || F.Aa, void 0, d))
+};
+F.Sc = function(a, b, c, d) {
+  d = d || na || (na = new D);
+  a = F.Ca(a(b || F.Aa, void 0, c));
+  F.Ua(a);
+  c = d.S;
+  b = c.createElement("div");
+  w ? (b.innerHTML = "\x3cbr\x3e" + a, b.removeChild(b.firstChild)) : b.innerHTML = a;
+  if(1 == b.childNodes.length) {
+    a = b.removeChild(b.firstChild)
+  }else {
+    for(a = c.createDocumentFragment();b.firstChild;) {
+      a.appendChild(b.firstChild)
+    }
+  }
+  return a
+};
+F.ma = function(a, b) {
+  var c = (na || (na = new D)).createElement("DIV"), d = F.Ca(a(b || F.Aa, void 0, void 0));
+  F.Ua(d);
+  c.innerHTML = d;
+  return 1 == c.childNodes.length && (d = c.firstChild, 1 == d.nodeType) ? d : c
+};
+F.Ca = function(a) {
+  var b;
+  if(b = !F.Cb) {
+    b = typeof a, b = !("object" == b && null != a || "function" == b)
+  }
+  if(b) {
+    return String(a)
+  }
+  if(a instanceof F.data.h) {
+    b = F.data.va;
+    if(a.s === b.ua) {
+      return a.content
+    }
+    if(a.s === b.Ta) {
+      return qa(a.content)
+    }
+  }
+  xa("Soy template output is unsafe for use as HTML: " + a);
+  return"zSoyz"
+};
+F.Ua = function(a) {
+  a.match(F.zb)
+};
+F.zb = /^<(body|caption|col|colgroup|head|html|tr|td|tbody|thead|tfoot)>/i;
+F.Aa = {};
+var G = F.data.va;
+function hb() {
+  F.data.h.call(this)
+}
+s(hb, F.data.h);
+hb.prototype.s = G.ua;
+function ib() {
+  F.data.h.call(this)
+}
+s(ib, F.data.h);
+ib.prototype.s = G.Ab;
+function jb() {
+  F.data.h.call(this)
+}
+s(jb, F.data.h);
+jb.prototype.s = G.Bb;
+function kb() {
+  F.data.h.call(this)
+}
+s(kb, F.data.h);
+kb.prototype.s = G.Db;
+function lb() {
+  F.data.h.call(this)
+}
+s(lb, F.data.h);
+lb.prototype.s = G.vb;
+function mb() {
+  F.data.h.call(this)
+}
+s(mb, F.data.h);
+mb.prototype.s = G.xb;
+function nb(a) {
+  this.content = String(a)
+}
+s(nb, F.data.h);
+nb.prototype.s = G.Ta;
+function H(a) {
+  return a && a.s && a.s === F.data.va.ua ? a.content : String(a).replace(ob, pb)
+}
+var qb = {"\x00":"\x26#0;", '"':"\x26quot;", "\x26":"\x26amp;", "'":"\x26#39;", "\x3c":"\x26lt;", "\x3e":"\x26gt;", "\t":"\x26#9;", "\n":"\x26#10;", "\x0B":"\x26#11;", "\f":"\x26#12;", "\r":"\x26#13;", " ":"\x26#32;", "-":"\x26#45;", "/":"\x26#47;", "\x3d":"\x26#61;", "`":"\x26#96;", "\u0085":"\x26#133;", "\u00a0":"\x26#160;", "\u2028":"\x26#8232;", "\u2029":"\x26#8233;"};
+function pb(a) {
+  return qb[a]
+}
+var ob = /[\x00\x22\x26\x27\x3c\x3e]/g;
+function rb(a) {
+  return'\x3ca href\x3d"' + H(a.Jb) + '" target\x3d"_blank"\x3e\x3cimg src\x3d"' + H(a.creativeUrl) + '" width\x3d"' + H(a.width) + '" height\x3d"' + H(a.height) + '" border\x3d0\x3e\x3c/a\x3e'
+}
+function sb(a) {
+  return'\x3cobject style\x3d"z-index:2" classid\x3d"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width\x3d"' + H(a.width) + '" height\x3d"' + H(a.height) + '" id\x3d"adaptvCompanionAd" align\x3d"middle"\x3e\x3cparam name\x3d"movie" value\x3d"' + H(a.creativeUrl) + '" /\x3e\x3cparam name\x3d"wmode" value\x3d"transparent" /\x3e\x3cparam name\x3d"allowScriptAccess" value\x3d"always" /\x3e\x3cembed src\x3d"' + H(a.creativeUrl) + '" width\x3d"' + H(a.width) + '" height\x3d"' + H(a.height) + '" name\x3d"player" align\x3d"middle" wmode\x3d"transparent" allowScriptAccess\x3d"always" type\x3d"application/x-shockwave-flash" style\x3d"z-index:2" /\x3e\x3c/object\x3e'
+}
+function tb(a) {
+  return'\x3cimg src\x3d"' + H(a.url) + '" alt\x3d"" width\x3d0 height\x3d0 style\x3d"border:0px none; display: none;" /\x3e'
+}
+;function ub(a) {
+  if("function" == typeof a.t) {
+    return a.t()
+  }
+  if(p(a)) {
+    return a.split("")
+  }
+  if(ea(a)) {
+    for(var b = [], c = a.length, d = 0;d < c;d++) {
+      b.push(a[d])
+    }
+    return b
+  }
+  return ab(a)
+}
+function vb(a, b, c) {
+  if("function" == typeof a.forEach) {
+    a.forEach(b, c)
+  }else {
+    if(ea(a) || p(a)) {
+      u(a, b, c)
+    }else {
+      var d;
+      if("function" == typeof a.H) {
+        d = a.H()
+      }else {
+        if("function" != typeof a.t) {
+          if(ea(a) || p(a)) {
+            d = [];
+            for(var e = a.length, f = 0;f < e;f++) {
+              d.push(f)
+            }
+          }else {
+            d = bb(a)
+          }
+        }else {
+          d = void 0
+        }
+      }
+      for(var e = ub(a), f = e.length, h = 0;h < f;h++) {
+        b.call(c, e[h], d && d[h], a)
+      }
+    }
+  }
+}
+;function wb(a, b) {
+  this.w = {};
+  this.j = [];
+  this.tb = this.f = 0;
+  var c = arguments.length;
+  if(1 < c) {
+    if(c % 2) {
+      throw Error("Uneven number of arguments");
+    }
+    for(var d = 0;d < c;d += 2) {
+      this.set(arguments[d], arguments[d + 1])
+    }
+  }else {
+    if(a) {
+      a instanceof wb ? (c = a.H(), d = a.t()) : (c = bb(a), d = ab(a));
+      for(var e = 0;e < c.length;e++) {
+        this.set(c[e], d[e])
+      }
+    }
+  }
+}
+k = wb.prototype;
+k.t = function() {
+  xb(this);
+  for(var a = [], b = 0;b < this.j.length;b++) {
+    a.push(this.w[this.j[b]])
+  }
+  return a
+};
+k.H = function() {
+  xb(this);
+  return this.j.concat()
+};
+k.r = function(a) {
+  return I(this.w, a)
+};
+k.remove = function(a) {
+  return I(this.w, a) ? (delete this.w[a], this.f--, this.tb++, this.j.length > 2 * this.f && xb(this), !0) : !1
+};
+function xb(a) {
+  if(a.f != a.j.length) {
+    for(var b = 0, c = 0;b < a.j.length;) {
+      var d = a.j[b];
+      I(a.w, d) && (a.j[c++] = d);
+      b++
+    }
+    a.j.length = c
+  }
+  if(a.f != a.j.length) {
+    for(var e = {}, c = b = 0;b < a.j.length;) {
+      d = a.j[b], I(e, d) || (a.j[c++] = d, e[d] = 1), b++
+    }
+    a.j.length = c
+  }
+}
+k.get = function(a, b) {
+  return I(this.w, a) ? this.w[a] : b
+};
+k.set = function(a, b) {
+  I(this.w, a) || (this.f++, this.j.push(a), this.tb++);
+  this.w[a] = b
+};
+k.I = function() {
+  return new wb(this)
+};
+function I(a, b) {
+  return Object.prototype.hasOwnProperty.call(a, b)
+}
+;function yb(a) {
+  return zb(a || arguments.callee.caller, [])
+}
+function zb(a, b) {
+  var c = [];
+  if(0 <= ya(b, a)) {
+    c.push("[...circular reference...]")
+  }else {
+    if(a && 50 > b.length) {
+      c.push(Ab(a) + "(");
+      for(var d = a.arguments, e = 0;e < d.length;e++) {
+        0 < e && c.push(", ");
+        var f;
+        f = d[e];
+        switch(typeof f) {
+          case "object":
+            f = f ? "object" : "null";
+            break;
+          case "string":
+            break;
+          case "number":
+            f = String(f);
+            break;
+          case "boolean":
+            f = f ? "true" : "false";
+            break;
+          case "function":
+            f = (f = Ab(f)) ? f : "[fn]";
+            break;
+          default:
+            f = typeof f
+        }
+        40 < f.length && (f = f.substr(0, 40) + "...");
+        c.push(f)
+      }
+      b.push(a);
+      c.push(")\n");
+      try {
+        c.push(zb(a.caller, b))
+      }catch(h) {
+        c.push("[exception trying to get caller]\n")
+      }
+    }else {
+      a ? c.push("[...long stack...]") : c.push("[end]")
+    }
+  }
+  return c.join("")
+}
+function Ab(a) {
+  if(Bb[a]) {
+    return Bb[a]
+  }
+  a = String(a);
+  if(!Bb[a]) {
+    var b = /function ([^\(]+)/.exec(a);
+    Bb[a] = b ? b[1] : "[Anonymous]"
+  }
+  return Bb[a]
+}
+var Bb = {};
+function Cb() {
+  0 != Db && (this.Pc = Error().stack, Eb[this[fa] || (this[fa] = ++ga)] = this)
+}
+var Db = 0, Eb = {};
+Cb.prototype.Ba = !1;
+Cb.prototype.fa = function() {
+  if(!this.Ba && (this.Ba = !0, this.J(), 0 != Db)) {
+    var a = this[fa] || (this[fa] = ++ga);
+    delete Eb[a]
+  }
+};
+Cb.prototype.J = function() {
+  if(this.eb) {
+    for(;this.eb.length;) {
+      this.eb.shift()()
+    }
+  }
+};
+var Fb = !w || w && 9 <= Ya, Gb = w && !B("9");
+!A || B("528");
+z && B("1.9b") || w && B("8") || Ma && B("9.5") || A && B("528");
+z && !B("8") || w && B("9");
+function Hb(a, b) {
+  this.type = a;
+  this.currentTarget = this.target = b
+}
+k = Hb.prototype;
+k.J = g();
+k.fa = g();
+k.O = !1;
+k.defaultPrevented = !1;
+k.ob = !0;
+k.preventDefault = function() {
+  this.defaultPrevented = !0;
+  this.ob = !1
+};
+function Ib(a) {
+  Ib[" "](a);
+  return a
+}
+Ib[" "] = da;
+function Jb(a, b) {
+  a && this.init(a, b)
+}
+s(Jb, Hb);
+k = Jb.prototype;
+k.target = null;
+k.relatedTarget = null;
+k.offsetX = 0;
+k.offsetY = 0;
+k.clientX = 0;
+k.clientY = 0;
+k.screenX = 0;
+k.screenY = 0;
+k.button = 0;
+k.keyCode = 0;
+k.charCode = 0;
+k.ctrlKey = !1;
+k.altKey = !1;
+k.shiftKey = !1;
+k.metaKey = !1;
+k.hc = !1;
+k.Va = null;
+k.init = function(a, b) {
+  var c = this.type = a.type;
+  Hb.call(this, c);
+  this.target = a.target || a.srcElement;
+  this.currentTarget = b;
+  var d = a.relatedTarget;
+  if(d) {
+    if(z) {
+      var e;
+      a: {
+        try {
+          Ib(d.nodeName);
+          e = !0;
+          break a
+        }catch(f) {
+        }
+        e = !1
+      }
+      e || (d = null)
+    }
+  }else {
+    "mouseover" == c ? d = a.fromElement : "mouseout" == c && (d = a.toElement)
+  }
+  this.relatedTarget = d;
+  this.offsetX = A || void 0 !== a.offsetX ? a.offsetX : a.layerX;
+  this.offsetY = A || void 0 !== a.offsetY ? a.offsetY : a.layerY;
+  this.clientX = void 0 !== a.clientX ? a.clientX : a.pageX;
+  this.clientY = void 0 !== a.clientY ? a.clientY : a.pageY;
+  this.screenX = a.screenX || 0;
+  this.screenY = a.screenY || 0;
+  this.button = a.button;
+  this.keyCode = a.keyCode || 0;
+  this.charCode = a.charCode || ("keypress" == c ? a.keyCode : 0);
+  this.ctrlKey = a.ctrlKey;
+  this.altKey = a.altKey;
+  this.shiftKey = a.shiftKey;
+  this.metaKey = a.metaKey;
+  this.hc = Oa ? a.metaKey : a.ctrlKey;
+  this.state = a.state;
+  this.Va = a;
+  a.defaultPrevented && this.preventDefault();
+  delete this.O
+};
+k.preventDefault = function() {
+  Jb.Qa.preventDefault.call(this);
+  var a = this.Va;
+  if(a.preventDefault) {
+    a.preventDefault()
+  }else {
+    if(a.returnValue = !1, Gb) {
+      try {
+        if(a.ctrlKey || 112 <= a.keyCode && 123 >= a.keyCode) {
+          a.keyCode = -1
+        }
+      }catch(b) {
+      }
+    }
+  }
+};
+k.J = g();
+var Kb = "closure_listenable_" + (1E6 * Math.random() | 0);
+function Lb(a) {
+  try {
+    return!(!a || !a[Kb])
+  }catch(b) {
+    return!1
+  }
+}
+var Mb = 0;
+function Nb(a, b, c, d, e) {
+  this.N = a;
+  this.la = null;
+  this.src = b;
+  this.type = c;
+  this.capture = !!d;
+  this.ha = e;
+  this.key = ++Mb;
+  this.W = this.ea = !1
+}
+function Ob(a) {
+  a.W = !0;
+  a.N = null;
+  a.la = null;
+  a.src = null;
+  a.ha = null
+}
+;function Pb(a) {
+  this.src = a;
+  this.k = {};
+  this.ca = 0
+}
+Pb.prototype.add = function(a, b, c, d, e) {
+  var f = this.k[a];
+  f || (f = this.k[a] = [], this.ca++);
+  var h = Qb(f, b, d, e);
+  -1 < h ? (a = f[h], c || (a.ea = !1)) : (a = new Nb(b, this.src, a, !!d, e), a.ea = c, f.push(a));
+  return a
+};
+Pb.prototype.remove = function(a, b, c, d) {
+  if(!(a in this.k)) {
+    return!1
+  }
+  var e = this.k[a];
+  b = Qb(e, b, c, d);
+  return-1 < b ? (Ob(e[b]), t.splice.call(e, b, 1), 0 == e.length && (delete this.k[a], this.ca--), !0) : !1
+};
+function Rb(a, b) {
+  var c = b.type;
+  c in a.k && Ca(a.k[c], b) && (Ob(b), 0 == a.k[c].length && (delete a.k[c], a.ca--))
+}
+Pb.prototype.Ha = function(a, b, c, d) {
+  a = this.k[a];
+  var e = -1;
+  a && (e = Qb(a, b, c, d));
+  return-1 < e ? a[e] : null
+};
+function Qb(a, b, c, d) {
+  for(var e = 0;e < a.length;++e) {
+    var f = a[e];
+    if(!f.W && f.N == b && f.capture == !!c && f.ha == d) {
+      return e
+    }
+  }
+  return-1
+}
+;var Sb = "closure_lm_" + (1E6 * Math.random() | 0), Tb = {}, Ub = 0;
+function Vb(a, b, c, d, e) {
+  if("array" == n(b)) {
+    for(var f = 0;f < b.length;f++) {
+      Vb(a, b[f], c, d, e)
+    }
+  }else {
+    if(c = Wb(c), Lb(a)) {
+      a.G.add(String(b), c, !1, d, e)
+    }else {
+      if(!b) {
+        throw Error("Invalid event type");
+      }
+      var f = !!d, h = Xb(a);
+      h || (a[Sb] = h = new Pb(a));
+      c = h.add(b, c, !1, d, e);
+      c.la || (d = Yb(), c.la = d, d.src = a, d.N = c, a.addEventListener ? a.addEventListener(b, d, f) : a.attachEvent(b in Tb ? Tb[b] : Tb[b] = "on" + b, d), Ub++)
+    }
+  }
+}
+function Yb() {
+  var a = Zb, b = Fb ? function(c) {
+    return a.call(b.src, b.N, c)
+  } : function(c) {
+    c = a.call(b.src, b.N, c);
+    if(!c) {
+      return c
+    }
+  };
+  return b
+}
+function $b(a, b, c, d, e) {
+  if("array" == n(b)) {
+    for(var f = 0;f < b.length;f++) {
+      $b(a, b[f], c, d, e)
+    }
+  }else {
+    c = Wb(c), Lb(a) ? a.G.remove(String(b), c, d, e) : a && (a = Xb(a)) && (b = a.Ha(b, c, !!d, e)) && ac(b)
+  }
+}
+function ac(a) {
+  if("number" != typeof a && a && !a.W) {
+    var b = a.src;
+    if(Lb(b)) {
+      Rb(b.G, a)
+    }else {
+      var c = a.type, d = a.la;
+      b.removeEventListener ? b.removeEventListener(c, d, a.capture) : b.detachEvent && b.detachEvent(c in Tb ? Tb[c] : Tb[c] = "on" + c, d);
+      Ub--;
+      (c = Xb(b)) ? (Rb(c, a), 0 == c.ca && (c.src = null, b[Sb] = null)) : Ob(a)
+    }
+  }
+}
+function bc(a, b, c, d) {
+  var e = 1;
+  if(a = Xb(a)) {
+    if(b = a.k[b]) {
+      for(b = Ea(b), a = 0;a < b.length;a++) {
+        var f = b[a];
+        f && (f.capture == c && !f.W) && (e &= !1 !== cc(f, d))
+      }
+    }
+  }
+  return Boolean(e)
+}
+function cc(a, b) {
+  var c = a.N, d = a.ha || a.src;
+  a.ea && ac(a);
+  return c.call(d, b)
+}
+function Zb(a, b) {
+  if(a.W) {
+    return!0
+  }
+  if(!Fb) {
+    var c = b || ca("window.event"), d = new Jb(c, this), e = !0;
+    if(!(0 > c.keyCode || void 0 != c.returnValue)) {
+      a: {
+        var f = !1;
+        if(0 == c.keyCode) {
+          try {
+            c.keyCode = -1;
+            break a
+          }catch(h) {
+            f = !0
+          }
+        }
+        if(f || void 0 == c.returnValue) {
+          c.returnValue = !0
+        }
+      }
+      c = [];
+      for(f = d.currentTarget;f;f = f.parentNode) {
+        c.push(f)
+      }
+      for(var f = a.type, m = c.length - 1;!d.O && 0 <= m;m--) {
+        d.currentTarget = c[m], e &= bc(c[m], f, !0, d)
+      }
+      for(m = 0;!d.O && m < c.length;m++) {
+        d.currentTarget = c[m], e &= bc(c[m], f, !1, d)
+      }
+    }
+    return e
+  }
+  return cc(a, new Jb(b, this))
+}
+function Xb(a) {
+  a = a[Sb];
+  return a instanceof Pb ? a : null
+}
+var dc = "__closure_events_fn_" + (1E9 * Math.random() >>> 0);
+function Wb(a) {
+  return"function" == n(a) ? a : a[dc] || (a[dc] = function(b) {
+    return a.handleEvent(b)
+  })
+}
+;function J() {
+  Cb.call(this);
+  this.G = new Pb(this);
+  this.Fb = this
+}
+s(J, Cb);
+J.prototype[Kb] = !0;
+k = J.prototype;
+k.Na = null;
+k.addEventListener = function(a, b, c, d) {
+  Vb(this, a, b, c, d)
+};
+k.removeEventListener = function(a, b, c, d) {
+  $b(this, a, b, c, d)
+};
+k.dispatchEvent = function(a) {
+  var b, c = this.Na;
+  if(c) {
+    for(b = [];c;c = c.Na) {
+      b.push(c)
+    }
+  }
+  var c = this.Fb, d = a.type || a;
+  if(p(a)) {
+    a = new Hb(a, c)
+  }else {
+    if(a instanceof Hb) {
+      a.target = a.target || c
+    }else {
+      var e = a;
+      a = new Hb(d, c);
+      db(a, e)
+    }
+  }
+  var e = !0, f;
+  if(b) {
+    for(var h = b.length - 1;!a.O && 0 <= h;h--) {
+      f = a.currentTarget = b[h], e = ec(f, d, !0, a) && e
+    }
+  }
+  a.O || (f = a.currentTarget = c, e = ec(f, d, !0, a) && e, a.O || (e = ec(f, d, !1, a) && e));
+  if(b) {
+    for(h = 0;!a.O && h < b.length;h++) {
+      f = a.currentTarget = b[h], e = ec(f, d, !1, a) && e
+    }
+  }
+  return e
+};
+k.J = function() {
+  J.Qa.J.call(this);
+  if(this.G) {
+    var a = this.G, b = 0, c;
+    for(c in a.k) {
+      for(var d = a.k[c], e = 0;e < d.length;e++) {
+        ++b, Ob(d[e])
+      }
+      delete a.k[c];
+      a.ca--
+    }
+  }
+  this.Na = null
+};
+function ec(a, b, c, d) {
+  b = a.G.k[String(b)];
+  if(!b) {
+    return!0
+  }
+  b = Ea(b);
+  for(var e = !0, f = 0;f < b.length;++f) {
+    var h = b[f];
+    if(h && !h.W && h.capture == c) {
+      var m = h.N, y = h.ha || h.src;
+      h.ea && Rb(a.G, h);
+      e = !1 !== m.call(y, d) && e
+    }
+  }
+  return e && !1 != d.ob
+}
+k.Ha = function(a, b, c, d) {
+  return this.G.Ha(String(a), b, c, d)
+};
+function fc(a, b, c) {
+  if("function" == n(a)) {
+    c && (a = q(a, c))
+  }else {
+    if(a && "function" == typeof a.handleEvent) {
+      a = q(a.handleEvent, a)
+    }else {
+      throw Error("Invalid listener argument");
+    }
+  }
+  return 2147483647 < b ? -1 : l.setTimeout(a, b || 0)
+}
+;var gc = RegExp("^(?:([^:/?#.]+):)?(?://(?:([^/?#]*)@)?([^/#?]*?)(?::([0-9]+))?(?\x3d[/#?]|$))?([^?#]+)?(?:\\?([^#]*))?(?:#(.*))?$");
+function hc(a) {
+  if(ic) {
+    ic = !1;
+    var b = l.location;
+    if(b) {
+      var c = b.href;
+      if(c && (c = (c = hc(c)[3] || null) && decodeURIComponent(c)) && c != b.hostname) {
+        throw ic = !0, Error();
+      }
+    }
+  }
+  return a.match(gc)
+}
+var ic = A;
+function K(a, b) {
+  var c;
+  if(a instanceof K) {
+    this.p = void 0 !== b ? b : a.p, jc(this, a.A), c = a.Q, L(this), this.Q = c, kc(this, a.F), lc(this, a.V), c = a.u, L(this), this.u = c, mc(this, a.i.I()), c = a.K, L(this), this.K = c
+  }else {
+    if(a && (c = hc(String(a)))) {
+      this.p = !!b;
+      jc(this, c[1] || "", !0);
+      var d = c[2] || "";
+      L(this);
+      this.Q = M(d);
+      kc(this, c[3] || "", !0);
+      lc(this, c[4]);
+      d = c[5] || "";
+      L(this);
+      this.u = M(d);
+      mc(this, c[6] || "", !0);
+      c = c[7] || "";
+      L(this);
+      this.K = M(c)
+    }else {
+      this.p = !!b, this.i = new nc(null, 0, this.p)
+    }
+  }
+}
+k = K.prototype;
+k.A = "";
+k.Q = "";
+k.F = "";
+k.V = null;
+k.u = "";
+k.K = "";
+k.Sb = !1;
+k.p = !1;
+k.toString = function() {
+  var a = [], b = this.A;
+  b && a.push(oc(b, pc), ":");
+  if(b = this.F) {
+    a.push("//");
+    var c = this.Q;
+    c && a.push(oc(c, pc), "@");
+    a.push(encodeURIComponent(String(b)));
+    b = this.V;
+    null != b && a.push(":", String(b))
+  }
+  if(b = this.u) {
+    this.F && "/" != b.charAt(0) && a.push("/"), a.push(oc(b, "/" == b.charAt(0) ? qc : rc))
+  }
+  (b = this.i.toString()) && a.push("?", b);
+  (b = this.K) && a.push("#", oc(b, sc));
+  return a.join("")
+};
+k.na = function(a) {
+  var b = this.I(), c = !!a.A;
+  c ? jc(b, a.A) : c = !!a.Q;
+  if(c) {
+    var d = a.Q;
+    L(b);
+    b.Q = d
+  }else {
+    c = !!a.F
+  }
+  c ? kc(b, a.F) : c = null != a.V;
+  d = a.u;
+  if(c) {
+    lc(b, a.V)
+  }else {
+    if(c = !!a.u) {
+      if("/" != d.charAt(0)) {
+        if(this.F && !this.u) {
+          d = "/" + d
+        }else {
+          var e = b.u.lastIndexOf("/");
+          -1 != e && (d = b.u.substr(0, e + 1) + d)
+        }
+      }
+      e = d;
+      if(".." == e || "." == e) {
+        d = ""
+      }else {
+        if(-1 != e.indexOf("./") || -1 != e.indexOf("/.")) {
+          for(var d = 0 == e.lastIndexOf("/", 0), e = e.split("/"), f = [], h = 0;h < e.length;) {
+            var m = e[h++];
+            "." == m ? d && h == e.length && f.push("") : ".." == m ? ((1 < f.length || 1 == f.length && "" != f[0]) && f.pop(), d && h == e.length && f.push("")) : (f.push(m), d = !0)
+          }
+          d = f.join("/")
+        }else {
+          d = e
+        }
+      }
+    }
+  }
+  c ? (L(b), b.u = d) : c = "" !== a.i.toString();
+  c ? mc(b, M(a.i.toString())) : c = !!a.K;
+  c && (a = a.K, L(b), b.K = a);
+  return b
+};
+k.I = function() {
+  return new K(this)
+};
+function jc(a, b, c) {
+  L(a);
+  a.A = c ? M(b) : b;
+  a.A && (a.A = a.A.replace(/:$/, ""))
+}
+function kc(a, b, c) {
+  L(a);
+  a.F = c ? M(b) : b;
+  return a
+}
+function lc(a, b) {
+  L(a);
+  if(b) {
+    b = Number(b);
+    if(isNaN(b) || 0 > b) {
+      throw Error("Bad port number " + b);
+    }
+    a.V = b
+  }else {
+    a.V = null
+  }
+}
+function mc(a, b, c) {
+  L(a);
+  b instanceof nc ? (a.i = b, a.i.Oa(a.p)) : (c || (b = oc(b, tc)), a.i = new nc(b, 0, a.p))
+}
+function L(a) {
+  if(a.Sb) {
+    throw Error("Tried to modify a read-only Uri");
+  }
+}
+k.Oa = function(a) {
+  this.p = a;
+  this.i && this.i.Oa(a);
+  return this
+};
+function uc(a) {
+  return a instanceof K ? a.I() : new K(a, void 0)
+}
+function M(a) {
+  return a ? decodeURIComponent(a) : ""
+}
+function oc(a, b) {
+  return p(a) ? encodeURI(a).replace(b, vc) : null
+}
+function vc(a) {
+  a = a.charCodeAt(0);
+  return"%" + (a >> 4 & 15).toString(16) + (a & 15).toString(16)
+}
+var pc = /[#\/\?@]/g, rc = /[\#\?:]/g, qc = /[\#\?]/g, tc = /[\#\?@]/g, sc = /#/g;
+function nc(a, b, c) {
+  this.o = a || null;
+  this.p = !!c
+}
+function N(a) {
+  if(!a.c && (a.c = new wb, a.f = 0, a.o)) {
+    for(var b = a.o.split("\x26"), c = 0;c < b.length;c++) {
+      var d = b[c].indexOf("\x3d"), e = null, f = null;
+      0 <= d ? (e = b[c].substring(0, d), f = b[c].substring(d + 1)) : e = b[c];
+      e = decodeURIComponent(e.replace(/\+/g, " "));
+      e = O(a, e);
+      a.add(e, f ? decodeURIComponent(f.replace(/\+/g, " ")) : "")
+    }
+  }
+}
+k = nc.prototype;
+k.c = null;
+k.f = null;
+k.add = function(a, b) {
+  N(this);
+  this.o = null;
+  a = O(this, a);
+  var c = this.c.get(a);
+  c || this.c.set(a, c = []);
+  c.push(b);
+  this.f++;
+  return this
+};
+k.remove = function(a) {
+  N(this);
+  a = O(this, a);
+  return this.c.r(a) ? (this.o = null, this.f -= this.c.get(a).length, this.c.remove(a)) : !1
+};
+k.r = function(a) {
+  N(this);
+  a = O(this, a);
+  return this.c.r(a)
+};
+k.H = function() {
+  N(this);
+  for(var a = this.c.t(), b = this.c.H(), c = [], d = 0;d < b.length;d++) {
+    for(var e = a[d], f = 0;f < e.length;f++) {
+      c.push(b[d])
+    }
+  }
+  return c
+};
+k.t = function(a) {
+  N(this);
+  var b = [];
+  if(p(a)) {
+    this.r(a) && (b = Da(b, this.c.get(O(this, a))))
+  }else {
+    a = this.c.t();
+    for(var c = 0;c < a.length;c++) {
+      b = Da(b, a[c])
+    }
+  }
+  return b
+};
+k.set = function(a, b) {
+  N(this);
+  this.o = null;
+  a = O(this, a);
+  this.r(a) && (this.f -= this.c.get(a).length);
+  this.c.set(a, [b]);
+  this.f++;
+  return this
+};
+k.get = function(a, b) {
+  var c = a ? this.t(a) : [];
+  return 0 < c.length ? String(c[0]) : b
+};
+k.toString = function() {
+  if(this.o) {
+    return this.o
+  }
+  if(!this.c) {
+    return""
+  }
+  for(var a = [], b = this.c.H(), c = 0;c < b.length;c++) {
+    for(var d = b[c], e = encodeURIComponent(String(d)), d = this.t(d), f = 0;f < d.length;f++) {
+      var h = e;
+      "" !== d[f] && (h += "\x3d" + encodeURIComponent(String(d[f])));
+      a.push(h)
+    }
+  }
+  return this.o = a.join("\x26")
+};
+k.I = function() {
+  var a = new nc;
+  a.o = this.o;
+  this.c && (a.c = this.c.I(), a.f = this.f);
+  return a
+};
+function O(a, b) {
+  var c = String(b);
+  a.p && (c = c.toLowerCase());
+  return c
+}
+k.Oa = function(a) {
+  a && !this.p && (N(this), this.o = null, vb(this.c, function(a, c) {
+    var d = c.toLowerCase();
+    c != d && (this.remove(c), this.remove(d), 0 < a.length && (this.o = null, this.c.set(O(this, d), Ea(a)), this.f += a.length))
+  }, this));
+  this.p = a
+};
+var wc = ["adap.tv", "effec.tv", "adaptv.advertising.com"];
+function xc(a) {
+  a = F.ma(tb, {url:a});
+  document.body.appendChild(a)
+}
+function yc() {
+  if("undefined" !== typeof navigator.plugins && "object" === typeof navigator.plugins["Shockwave Flash"] && "undefined" !== typeof navigator.mimeTypes && navigator.mimeTypes["application/x-shockwave-flash"] && navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin) {
+    return!0
+  }
+  if("undefined" !== typeof window.ActiveXObject) {
+    try {
+      if(new window.ActiveXObject("ShockwaveFlash.ShockwaveFlash")) {
+        return!0
+      }
+    }catch(a) {
+    }
+  }
+  return!1
+}
+function zc(a) {
+  var b = !1;
+  u(wc, function(c) {
+    0 < uc(a).F.indexOf(c) && (b = !0)
+  });
+  return b
+}
+function Ac(a) {
+  var b = document.createElement("video");
+  return!b.canPlayType || (!a || !a.type) || Ja().toLowerCase().match(/(ipad|iphone|ipod)/g) && "video/mp4" === a.type && (1080 < a.height || 1920 < a.width) ? !1 : "" !== b.canPlayType(a.type)
+}
+;var Bc;
+Bc = (new K((new la).Ia())).A;
+0 !== Bc.indexOf("http") && (Bc = "https");
+var Cc = /{([\w.]*)}|(<([^<>]*)>)|(\[([\w.]*)\])/g;
+function Dc(a, b) {
+  K.call(this, a, b)
+}
+s(Dc, K);
+Dc.prototype.Ia = function() {
+  var a = M(this.i.toString()), a = a.replace(Cc, "");
+  mc(this, a, void 0);
+  return this.toString()
+};
+function P(a, b) {
+  this.errorCode = a;
+  this.errorMessage = b || ""
+}
+;var Ec = new P(9411, "The adTag response is invalid."), Fc = new P(9412, "The video format is not supported."), Gc = new P(9413, "Wrapper limit reached."), Hc = new P(9560, "No more ads or no failover available"), Ic = new P(9412, "The video format is not supported."), Jc = new P(9414, "Quartile events are before Impression event."), Kc = new P(9416, "General VPAID error."), Lc = new P(9417, "Ad slot is required in order to play VPAID Flash"), Mc = new P(9514, "Ad slots are not defined correctly."), 
+Nc = new P(9515, "AdTag URL or the publisherId is not passed in params."), Oc = new P(9522, "Ad Started timeout: startAd call to AdStarted event."), Pc = new P(9525, "Ad Opportunity timeout: initAd call to AdLoaded event for entire opportunity."), Qc = new P(9526, "Ad Loaded timeout: initAd call to AdLoaded event for a single Ad."), Rc = new P(9560, "No more ads or no failover available"), Sc = new P(9570, "Failed to inject Code Dependencies."), Tc = new P(9514, "Ad slots are not defined correctly."), 
+Uc = new P(9515, "AdTag URL or the publisherId is not passed in params."), Vc = new P(9570, "Failed to inject GoogleIMA3 Dependencies."), Wc = new P(9571, "Failed to initialize GoogleIMA3 adManager."), Xc = new P(9401, "Error while resolving the adTag URL."), Yc = new P(9402, "Timeout while resolving the adTag URL."), Zc = new P(9430, "VAST schema validation error."), $c = new P(9431, "Empty VAST response."), ad = new P(9432, "No ad found in ad tag response."), bd = new P(9521, "Error while trying to play media files."), 
+cd = new P(9523, "Invalid ad container."), dd = new P(9524, "HTML5 element tag is not supported to play an ad.");
+function ed() {
+  this.$ = !1;
+  this.l = [];
+  this.error = new P(0, "")
+}
+ed.prototype.push = function(a) {
+  this.l.push(a)
+};
+function fd(a, b) {
+  this.depth = b;
+  this.n = new gd;
+  this.n.push(a)
+}
+function hd() {
+  this.surveyURL = "";
+  this.beacons = [];
+  this.b = [];
+  this.R = [];
+  this.companionString = "";
+  this.T = {scripts:[]}
+}
+function id() {
+  this.qa = "";
+  this.beacons = [];
+  this.b = [];
+  this.R = [];
+  this.T = {scripts:[]}
+}
+function jd() {
+  this.duration = 0;
+  this.beacons = [];
+  this.clickThrough = "";
+  this.mediaFiles = [];
+  this.adParameters = "";
+  this.hasAdaptvParams = !1;
+  this.skipoffset = ""
+}
+function kd() {
+  this.width = this.height = this.bitrate = 0;
+  this.apiFramework = this.url = this.type = this.delivery = ""
+}
+function ld() {
+  var a;
+  a = a || {};
+  this.adListIndex = 0;
+  this.adListSize = 1;
+  this.adParameters = [];
+  this.beacons = a.beacons || [];
+  this.clickThrough = a.clickThrough || "";
+  this.companions = a.companions || [];
+  this.companionString = a.companionString || "";
+  this.data = {AdParameters:""};
+  a && a.adParameters && (this.adParameters = a.adParameters, 0 < a.adParameters.length && (this.data = {AdParameters:a.adParameters[a.adParameters.length - 1]}));
+  this.duration = a.duration || "";
+  this.error = a.error ? new P(a.error.errorCode, a.error.errorMessage) : new P(0, "");
+  this.isFLV = a.isFLV || !1;
+  this.isVPAID = a.isVPAID || !1;
+  this.hasAdaptvParams = a.hasAdaptvParams || !1;
+  this.mediaFile = null;
+  this.mediaFiles = a.mediaFiles || [];
+  this.scripts = a.scripts || [];
+  this.skipoffset = a.skipoffset || "";
+  this.surveyURL = a.surveyURL || ""
+}
+function gd() {
+  this.stack = []
+}
+gd.prototype.push = function(a) {
+  this.stack.push(a)
+};
+gd.prototype.size = function() {
+  return this.stack.length
+};
+function md(a, b) {
+  for(var c = [], d = a.stack, e = 0;e < d.length;e++) {
+    d[e] && d[e].beacons.beaconsForEvent[b] && (c = c.concat(d[e].beacons.beaconsForEvent[b])), d[e] && (d[e].b && d[e].b[0] && d[e].b[0].beacons.beaconsForEvent[b]) && (c = c.concat(d[e].b[0].beacons.beaconsForEvent[b]))
+  }
+  return c
+}
+function nd(a) {
+  for(var b = [], c = 0;c < a.stack.length;c++) {
+    a.stack[c].b && (a.stack[c].b[0] && a.stack[c].b[0].adParameters) && b.push(a.stack[c].b[0].adParameters)
+  }
+  return b
+}
+function od(a) {
+  var b = [];
+  a = a.stack;
+  for(var c = 0;c < a.length;c++) {
+    a[c].beacons.beacons && (b = b.concat(a[c].beacons.beacons)), a[c].b && (a[c].b[0] && a[c].b[0].beacons.beacons) && (b = b.concat(a[c].b[0].beacons.beacons))
+  }
+  return b
+}
+function pd(a) {
+  var b = [];
+  u(a.stack, function(a) {
+    a.T && (a.T.scripts && a.T.scripts.length) && (b = b.concat(a.T.scripts))
+  });
+  return b
+}
+function qd(a) {
+  return(a = a.stack) && a.length ? a[a.length - 1] : null
+}
+function rd() {
+  this.beacons = [];
+  this.beaconsForEvent = {}
+}
+rd.prototype.add = function(a, b, c) {
+  var d;
+  a: {
+    d = Q;
+    for(var e in d) {
+      if(d[e] == a) {
+        d = !0;
+        break a
+      }
+    }
+    d = !1
+  }
+  d && (this.beacons.push({beaconType:a, fired:!1, offset:c, url:b}), this.beaconsForEvent[a] = this.beaconsForEvent[a] || [], this.beaconsForEvent[a].push(b))
+};
+var Q = {sa:"attempt", wb:"clickThru", rc:"companionDisplay", sc:"complete", Sa:"creativeView", ta:"error", tc:"firstQuartile", uc:"iab_detection_failed", vc:"iab_detection_started", wc:"iab_viewable", yb:"impression", xc:"loaded", Bc:"midpoint", Cc:"mute", Dc:"pause", Ec:"progress", Fc:"resume", Hc:"start", Ic:"stopped", Gc:"skip", Jc:"thirdQuartile", Kc:"unmute"};
+function sd(a, b) {
+  this.width = a;
+  this.height = b;
+  this.label = a + "x" + b
+}
+function td() {
+  this.creativeType = this.resourceType = "";
+  this.beacons = this.height = this.width = this.companionSize = null;
+  this.htmlTag = this.creativeUrl = this.clickThrough = "";
+  this.valid = !0
+}
+td.prototype.normalize = function() {
+  switch(this.resourceType) {
+    case "static":
+    ;
+    case "other":
+      switch(this.creativeType) {
+        case "image/png":
+        ;
+        case "image/jpeg":
+        ;
+        case "image/gif":
+        ;
+        case "png":
+        ;
+        case "jpeg":
+        ;
+        case "gif":
+          this.htmlTag = F.ma(rb, {Jb:this.clickThrough, creativeUrl:this.creativeUrl, width:this.companionSize.width, height:this.companionSize.height}).outerHTML;
+          break;
+        case "swf":
+        ;
+        case "application/x-shockwave-flash":
+          var a = Ja().toLowerCase();
+          if(0 <= a.indexOf("iphone") || 0 <= a.indexOf("ipad") || 0 <= a.indexOf("ipod")) {
+            this.valid = !1;
+            break
+          }
+          if(this.clickThrough) {
+            a = uc(this.creativeUrl);
+            if(!a.i.r("clickTag")) {
+              var b = this.clickThrough;
+              L(a);
+              a.i.set("clickTag", b)
+            }
+            b = a.toString();
+            if(!a.i.r("clicktag")) {
+              var c = this.clickThrough;
+              L(a);
+              a.i.set("clicktag", c)
+            }
+            this.creativeUrl = 2064 > a.toString().length ? a.toString() : b
+          }
+          this.htmlTag = F.ma(sb, {creativeUrl:this.creativeUrl, width:this.companionSize.width, height:this.companionSize.height}).outerHTML
+      }
+      this.resourceType = "html";
+    case "html":
+      a = "";
+      if((b = this.beacons.beaconsForEvent[Q.Sa]) && b.length) {
+        for(c = 0;c < b.length;c++) {
+          a += F.ma(tb, {url:b[c]}).outerHTML
+        }
+      }
+      this.htmlTag = a + this.htmlTag
+  }
+  this.width = this.companionSize.width;
+  this.height = this.companionSize.height;
+  return this
+};
+function ud(a, b) {
+  this.type = a;
+  this.data = b || {}
+}
+;function R(a, b, c, d, e) {
+  this.reset(a, b, c, d, e)
+}
+R.prototype.lc = 0;
+R.prototype.Fa = null;
+R.prototype.Ea = null;
+var vd = 0;
+R.prototype.reset = function(a, b, c, d, e) {
+  this.lc = "number" == typeof e ? e : vd++;
+  this.rb = d || ka();
+  this.M = a;
+  this.cb = b;
+  this.bb = c;
+  delete this.Fa;
+  delete this.Ea
+};
+R.prototype.Pa = function(a) {
+  this.M = a
+};
+function S(a) {
+  this.Tb = a
+}
+S.prototype.ka = null;
+S.prototype.M = null;
+S.prototype.ya = null;
+S.prototype.U = null;
+function T(a, b) {
+  this.name = a;
+  this.value = b
+}
+T.prototype.toString = aa("name");
+var wd = new T("SHOUT", 1200), xd = new T("SEVERE", 1E3), yd = new T("WARNING", 900), zd = new T("INFO", 800), Ad = new T("CONFIG", 700), Bd = new T("FINE", 500), Cd = new T("ALL", 0);
+k = S.prototype;
+k.wa = function(a) {
+  this.U || (this.U = []);
+  this.U.push(a)
+};
+k.mb = function(a) {
+  var b = this.U;
+  return!!b && Ca(b, a)
+};
+k.getParent = aa("ka");
+k.Wa = function() {
+  this.ya || (this.ya = {});
+  return this.ya
+};
+k.Pa = function(a) {
+  this.M = a
+};
+function Dd(a) {
+  if(a.M) {
+    return a.M
+  }
+  if(a.ka) {
+    return Dd(a.ka)
+  }
+  xa("Root logger has no level set.");
+  return null
+}
+k.log = function(a, b, c) {
+  if(a.value >= Dd(this).value) {
+    for(a = this.Mb(a, b, c), b = "log:" + a.cb, l.console && (l.console.timeStamp ? l.console.timeStamp(b) : l.console.markTimeline && l.console.markTimeline(b)), l.msWriteProfilerMark && l.msWriteProfilerMark(b), b = this;b;) {
+      c = b;
+      var d = a;
+      if(c.U) {
+        for(var e = 0, f = void 0;f = c.U[e];e++) {
+          f(d)
+        }
+      }
+      b = b.getParent()
+    }
+  }
+};
+k.Mb = function(a, b, c) {
+  var d = new R(a, String(b), this.Tb);
+  if(c) {
+    d.Fa = c;
+    var e;
+    var f = arguments.callee.caller;
+    try {
+      var h;
+      var m = ca("window.location.href");
+      if(p(c)) {
+        h = {message:c, name:"Unknown error", lineNumber:"Not available", fileName:m, stack:"Not available"}
+      }else {
+        var y, ia, x = !1;
+        try {
+          y = c.lineNumber || c.Qc || "Not available"
+        }catch(E) {
+          y = "Not available", x = !0
+        }
+        try {
+          ia = c.fileName || c.filename || c.sourceURL || l.$googDebugFname || m
+        }catch(re) {
+          ia = "Not available", x = !0
+        }
+        h = !x && c.lineNumber && c.fileName && c.stack && c.message && c.name ? c : {message:c.message || "Not available", name:c.name || "UnknownError", lineNumber:y, fileName:ia, stack:c.stack || "Not available"}
+      }
+      e = "Message: " + qa(h.message) + '\nUrl: \x3ca href\x3d"view-source:' + h.fileName + '" target\x3d"_new"\x3e' + h.fileName + "\x3c/a\x3e\nLine: " + h.lineNumber + "\n\nBrowser stack:\n" + qa(h.stack + "-\x3e ") + "[end]\n\nJS stack traversal:\n" + qa(yb(f) + "-\x3e ")
+    }catch(je) {
+      e = "Exception trying to expose exception! You win, we lose. " + je
+    }
+    d.Ea = e
+  }
+  return d
+};
+k.Ra = function(a, b) {
+  this.log(yd, a, b)
+};
+k.info = function(a, b) {
+  this.log(zd, a, b)
+};
+k.m = function(a, b) {
+  this.log(Bd, a, b)
+};
+var Ed = {}, Fd = null;
+function Gd() {
+  Fd || (Fd = new S(""), Ed[""] = Fd, Fd.Pa(Ad))
+}
+function Hd(a) {
+  Gd();
+  var b;
+  if(!(b = Ed[a])) {
+    b = new S(a);
+    var c = a.lastIndexOf("."), d = a.substr(c + 1), c = Hd(a.substr(0, c));
+    c.Wa()[d] = b;
+    b.ka = c;
+    Ed[a] = b
+  }
+  return b
+}
+;var U = {C:!0};
+U.Ac = S;
+U.yc = T;
+U.zc = R;
+U.Nb = function() {
+  return U.C ? Hd("goog.net.XhrIo") : null
+};
+U.wa = function(a, b) {
+  U.C && a && a.wa(b)
+};
+U.mb = function(a, b) {
+  return U.C && a ? a.mb(b) : !1
+};
+U.log = function(a, b, c, d) {
+  U.C && a && a.log(b, c, d)
+};
+U.error = function(a, b, c) {
+  U.C && a && a.log(xd, b, c)
+};
+U.Ra = function(a, b, c) {
+  U.C && a && a.Ra(b, c)
+};
+U.info = function(a, b, c) {
+  U.C && a && a.info(b, c)
+};
+U.m = function(a, b, c) {
+  U.C && a && a.m(b, c)
+};
+function Id() {
+}
+Id.prototype.da = null;
+var Jd;
+function Kd() {
+}
+s(Kd, Id);
+Kd.prototype.za = function() {
+  var a = Ld(this);
+  return a ? new ActiveXObject(a) : new XMLHttpRequest
+};
+Kd.prototype.Ka = function() {
+  var a = {};
+  Ld(this) && (a[0] = !0, a[1] = !0);
+  return a
+};
+function Ld(a) {
+  if(!a.Ya && "undefined" == typeof XMLHttpRequest && "undefined" != typeof ActiveXObject) {
+    for(var b = ["MSXML2.XMLHTTP.6.0", "MSXML2.XMLHTTP.3.0", "MSXML2.XMLHTTP", "Microsoft.XMLHTTP"], c = 0;c < b.length;c++) {
+      var d = b[c];
+      try {
+        return new ActiveXObject(d), a.Ya = d
+      }catch(e) {
+      }
+    }
+    throw Error("Could not create ActiveXObject. ActiveX might be disabled, or MSXML might not be installed");
+  }
+  return a.Ya
+}
+Jd = new Kd;
+function Md(a) {
+  J.call(this);
+  this.headers = new wb;
+  this.Z = a || null;
+  this.D = !1;
+  this.ra = this.a = null;
+  this.$a = this.ja = "";
+  this.aa = 0;
+  this.ba = "";
+  this.L = this.Ja = this.ia = this.Da = !1;
+  this.X = 0;
+  this.oa = null;
+  this.nb = Nd;
+  this.pa = this.ub = !1
+}
+s(Md, J);
+var Nd = "";
+Md.prototype.g = U.Nb();
+var Od = /^https?$/i, Pd = ["POST", "PUT"];
+k = Md.prototype;
+k.send = function(a, b, c, d) {
+  if(this.a) {
+    throw Error("[goog.net.XhrIo] Object is active with another request\x3d" + this.ja + "; newUri\x3d" + a);
+  }
+  b = b ? b.toUpperCase() : "GET";
+  this.ja = a;
+  this.ba = "";
+  this.aa = 0;
+  this.$a = b;
+  this.Da = !1;
+  this.D = !0;
+  this.a = this.Z ? this.Z.za() : Jd.za();
+  this.ra = this.Z ? this.Z.da || (this.Z.da = this.Z.Ka()) : Jd.da || (Jd.da = Jd.Ka());
+  this.a.onreadystatechange = q(this.fb, this);
+  try {
+    U.m(this.g, V(this, "Opening Xhr")), this.Ja = !0, this.a.open(b, a, !0), this.Ja = !1
+  }catch(e) {
+    U.m(this.g, V(this, "Error opening Xhr: " + e.message));
+    Qd(this, e);
+    return
+  }
+  a = c || "";
+  var f = this.headers.I();
+  d && vb(d, function(a, b) {
+    f.set(b, a)
+  });
+  d = Aa(f.H());
+  c = l.FormData && a instanceof l.FormData;
+  !(0 <= ya(Pd, b)) || (d || c) || f.set("Content-Type", "application/x-www-form-urlencoded;charset\x3dutf-8");
+  vb(f, function(a, b) {
+    this.a.setRequestHeader(b, a)
+  }, this);
+  this.nb && (this.a.responseType = this.nb);
+  "withCredentials" in this.a && (this.a.withCredentials = this.ub);
+  try {
+    Rd(this), 0 < this.X && (this.pa = w && B(9) && "number" == typeof this.a.timeout && void 0 !== this.a.ontimeout, U.m(this.g, V(this, "Will abort after " + this.X + "ms if incomplete, xhr2 " + this.pa)), this.pa ? (this.a.timeout = this.X, this.a.ontimeout = q(this.sb, this)) : this.oa = fc(this.sb, this.X, this)), U.m(this.g, V(this, "Sending request")), this.ia = !0, this.a.send(a), this.ia = !1
+  }catch(h) {
+    U.m(this.g, V(this, "Send error: " + h.message)), Qd(this, h)
+  }
+};
+function Ba(a) {
+  return"content-type" == a.toLowerCase()
+}
+k.sb = function() {
+  "undefined" != typeof ba && this.a && (this.ba = "Timed out after " + this.X + "ms, aborting", this.aa = 8, U.m(this.g, V(this, this.ba)), this.dispatchEvent("timeout"), this.abort(8))
+};
+function Qd(a, b) {
+  a.D = !1;
+  a.a && (a.L = !0, a.a.abort(), a.L = !1);
+  a.ba = b;
+  a.aa = 5;
+  Sd(a);
+  Td(a)
+}
+function Sd(a) {
+  a.Da || (a.Da = !0, a.dispatchEvent("complete"), a.dispatchEvent("error"))
+}
+k.abort = function(a) {
+  this.a && this.D && (U.m(this.g, V(this, "Aborting")), this.D = !1, this.L = !0, this.a.abort(), this.L = !1, this.aa = a || 7, this.dispatchEvent("complete"), this.dispatchEvent("abort"), Td(this))
+};
+k.J = function() {
+  this.a && (this.D && (this.D = !1, this.L = !0, this.a.abort(), this.L = !1), Td(this, !0));
+  Md.Qa.J.call(this)
+};
+k.fb = function() {
+  this.Ba || (this.Ja || this.ia || this.L ? Ud(this) : this.Ub())
+};
+k.Ub = function() {
+  Ud(this)
+};
+function Ud(a) {
+  if(a.D && "undefined" != typeof ba) {
+    if(a.ra[1] && 4 == Vd(a) && 2 == Wd(a)) {
+      U.m(a.g, V(a, "Local request error detected and ignored"))
+    }else {
+      if(a.ia && 4 == Vd(a)) {
+        fc(a.fb, 0, a)
+      }else {
+        if(a.dispatchEvent("readystatechange"), 4 == Vd(a)) {
+          U.m(a.g, V(a, "Request complete"));
+          a.D = !1;
+          try {
+            var b = Wd(a), c, d;
+            a: {
+              switch(b) {
+                case 200:
+                ;
+                case 201:
+                ;
+                case 202:
+                ;
+                case 204:
+                ;
+                case 206:
+                ;
+                case 304:
+                ;
+                case 1223:
+                  d = !0;
+                  break a;
+                default:
+                  d = !1
+              }
+            }
+            if(!(c = d)) {
+              var e;
+              if(e = 0 === b) {
+                var f = hc(String(a.ja))[1] || null;
+                if(!f && self.location) {
+                  var h = self.location.protocol, f = h.substr(0, h.length - 1)
+                }
+                e = !Od.test(f ? f.toLowerCase() : "")
+              }
+              c = e
+            }
+            if(c) {
+              a.dispatchEvent("complete"), a.dispatchEvent("success")
+            }else {
+              a.aa = 6;
+              var m;
+              try {
+                m = 2 < Vd(a) ? a.a.statusText : ""
+              }catch(y) {
+                U.m(a.g, "Can not get status: " + y.message), m = ""
+              }
+              a.ba = m + " [" + Wd(a) + "]";
+              Sd(a)
+            }
+          }finally {
+            Td(a)
+          }
+        }
+      }
+    }
+  }
+}
+function Td(a, b) {
+  if(a.a) {
+    Rd(a);
+    var c = a.a, d = a.ra[0] ? da : null;
+    a.a = null;
+    a.ra = null;
+    b || a.dispatchEvent("ready");
+    try {
+      c.onreadystatechange = d
+    }catch(e) {
+      U.error(a.g, "Problem encountered resetting onreadystatechange: " + e.message)
+    }
+  }
+}
+function Rd(a) {
+  a.a && a.pa && (a.a.ontimeout = null);
+  "number" == typeof a.oa && (l.clearTimeout(a.oa), a.oa = null)
+}
+function Vd(a) {
+  return a.a ? a.a.readyState : 0
+}
+function Wd(a) {
+  try {
+    return 2 < Vd(a) ? a.a.status : -1
+  }catch(b) {
+    return U.Ra(a.g, "Can not get status: " + b.message), -1
+  }
+}
+function Xd(a) {
+  try {
+    return a.a ? a.a.responseText : ""
+  }catch(b) {
+    return U.m(a.g, "Can not get responseText: " + b.message), ""
+  }
+}
+function Yd(a) {
+  try {
+    return a.a ? a.a.responseXML : null
+  }catch(b) {
+    return U.m(a.g, "Can not get responseXML: " + b.message), null
+  }
+}
+function V(a, b) {
+  return b + " [" + a.$a + " " + a.ja + " " + Wd(a) + "]"
+}
+;function Zd() {
+}
+s(Zd, Id);
+Zd.prototype.za = function() {
+  var a = new XMLHttpRequest;
+  if("withCredentials" in a) {
+    return a
+  }
+  if("undefined" != typeof XDomainRequest) {
+    return new $d
+  }
+  throw Error("Unsupported browser");
+};
+Zd.prototype.Ka = function() {
+  return{}
+};
+function $d() {
+  this.B = new XDomainRequest;
+  this.readyState = 0;
+  this.responseText = this.onreadystatechange = null;
+  this.status = -1;
+  this.statusText = this.responseXML = null;
+  this.B.onload = q(this.Ob, this);
+  this.B.onerror = q(this.Xa, this);
+  this.B.onprogress = q(this.Pb, this);
+  this.B.ontimeout = q(this.Qb, this)
+}
+k = $d.prototype;
+k.open = function(a, b, c) {
+  if(null != c && !c) {
+    throw Error("Only async requests are supported.");
+  }
+  this.B.open(a, b)
+};
+k.send = function(a) {
+  if(a) {
+    if("string" == typeof a) {
+      this.B.send(a)
+    }else {
+      throw Error("Only string data is supported");
+    }
+  }else {
+    this.B.send()
+  }
+};
+k.abort = function() {
+  this.B.abort()
+};
+k.setRequestHeader = g();
+k.Ob = function() {
+  this.status = 200;
+  this.responseText = this.B.responseText;
+  ae(this, 4)
+};
+k.Xa = function() {
+  this.status = 500;
+  this.responseText = null;
+  ae(this, 4)
+};
+k.Qb = function() {
+  this.Xa()
+};
+k.Pb = function() {
+  this.status = 200;
+  ae(this, 1)
+};
+function ae(a, b) {
+  a.readyState = b;
+  if(a.onreadystatechange) {
+    a.onreadystatechange()
+  }
+}
+;function be(a) {
+  this.S = a
+}
+var ce = /\s*;\s*/;
+k = be.prototype;
+k.set = function(a, b, c, d, e, f) {
+  if(/[;=\s]/.test(a)) {
+    throw Error('Invalid cookie name "' + a + '"');
+  }
+  if(/[;\r\n]/.test(b)) {
+    throw Error('Invalid cookie value "' + b + '"');
+  }
+  void 0 !== c || (c = -1);
+  e = e ? ";domain\x3d" + e : "";
+  d = d ? ";path\x3d" + d : "";
+  f = f ? ";secure" : "";
+  c = 0 > c ? "" : 0 == c ? ";expires\x3d" + (new Date(1970, 1, 1)).toUTCString() : ";expires\x3d" + (new Date(ka() + 1E3 * c)).toUTCString();
+  this.S.cookie = a + "\x3d" + b + e + d + c + f
+};
+k.get = function(a, b) {
+  for(var c = a + "\x3d", d = (this.S.cookie || "").split(ce), e = 0, f;f = d[e];e++) {
+    if(0 == f.lastIndexOf(c, 0)) {
+      return f.substr(c.length)
+    }
+    if(f == a) {
+      return""
+    }
+  }
+  return b
+};
+k.remove = function(a, b, c) {
+  var d = this.r(a);
+  this.set(a, "", 0, b, c);
+  return d
+};
+k.H = function() {
+  return de(this).keys
+};
+k.t = function() {
+  return de(this).qc
+};
+k.r = function(a) {
+  return void 0 !== this.get(a)
+};
+function de(a) {
+  a = (a.S.cookie || "").split(ce);
+  for(var b = [], c = [], d, e, f = 0;e = a[f];f++) {
+    d = e.indexOf("\x3d"), -1 == d ? (b.push(""), c.push(e)) : (b.push(e.substring(0, d)), c.push(e.substring(d + 1)))
+  }
+  return{keys:b, qc:c}
+}
+;function ee(a) {
+  if("undefined" != typeof DOMParser) {
+    return(new DOMParser).parseFromString(a, "application/xml")
+  }
+  if("undefined" != typeof ActiveXObject) {
+    var b = new ActiveXObject("MSXML2.DOMDocument");
+    if(b) {
+      b.resolveExternals = !1;
+      b.validateOnParse = !1;
+      try {
+        b.setProperty("ProhibitDTD", !0), b.setProperty("MaxXMLSize", 2048), b.setProperty("MaxElementDepth", 256)
+      }catch(c) {
+      }
+    }
+    b.loadXML(a);
+    return b
+  }
+  throw Error("Your browser does not support loading xml documents");
+}
+;function fe(a, b, c) {
+  J.call(this);
+  this.P = pa(a);
+  a = this.P;
+  if(!(0 > a.indexOf("ads.adap.tv"))) {
+    var d = new be(document), e = d.get("migrated");
+    b: {
+      for(var e = String(e), f = 0;2 > f;f++) {
+        var h = "\"'".charAt(f);
+        if(e.charAt(0) == h && e.charAt(e.length - 1) == h) {
+          e = e.substring(1, e.length - 1);
+          break b
+        }
+      }
+    }
+    if(parseInt(e, 10) || !d.r("adaptv_unique_user_cookie")) {
+      a = kc(new K(a), "ads.adaptv.advertising.com").toString()
+    }
+  }
+  this.P = a;
+  this.Kb = b + 1;
+  this.Gb = c;
+  this.e = new ed;
+  this.g = Hd("adaptv.vpaid.Resolver")
+}
+s(fe, J);
+fe.prototype.na = function() {
+  this.q = new Md(new Zd);
+  this.q.X = Math.max(0, this.Gb);
+  var a = zc(this.P);
+  this.q.ub = a;
+  Vb(this.q, ["success", "error", "timeout"], this.Vb, !1, this);
+  this.q.send(this.P)
+};
+fe.prototype.Vb = function(a) {
+  switch(a.type) {
+    case "success":
+      a = null;
+      null !== Yd(this.q) ? a = Yd(this.q) : null !== Xd(this.q) && (a = ee(Xd(this.q)));
+      a = W.hb(a);
+      this.e.$ = this.e.$ || a.$;
+      Fa(this.e.l, a.l);
+      this.q.fa();
+      (a = a.l[0]) && a.length ? this.Kb == this.e.l.length || a[0] instanceof hd ? this.dispatchEvent(new ud("done", this.e)) : (a = a[0]) && a.qa ? (this.P = a.qa, this.na()) : (this.e.error = Xc, this.dispatchEvent(new ud("error", this.e))) : (this.e.error = W.error || Xc, this.dispatchEvent(new ud("error", this.e)));
+      break;
+    case "error":
+      this.q.fa();
+      this.e.error = Xc;
+      this.dispatchEvent(new ud("error", this.e));
+      break;
+    case "timeout":
+      this.q.fa(), this.e.error = Yc, this.dispatchEvent(new ud("error", this.e))
+  }
+};
+var W = {hb:function(a) {
+  var b = new ed;
+  a && (b.$ = a.getElementsByTagName("VAST")[0] && "true" === a.getElementsByTagName("VAST")[0].getAttribute("adaptvFailover"), a = W.ec(a), b.push(a));
+  return b
+}, ec:function(a) {
+  if(a) {
+    var b = [], c = a.getElementsByTagName("VAST")[0];
+    a = !1;
+    if(!c) {
+      return W.error = Zc, b
+    }
+    c = C(c);
+    if(0 === c.length) {
+      return W.error = $c, b
+    }
+    for(var d = 0;d < c.length;d++) {
+      "Ad" === c[d].nodeName && (a = !0, b.push(W.Xb(c[d])))
+    }
+    a || (W.error = ad);
+    return b
+  }
+}, Xb:function(a) {
+  if(a) {
+    a = C(a);
+    for(var b = 0;b < a.length;b++) {
+      var c = a[b];
+      switch(c.nodeName) {
+        case "InLine":
+          return W.bc(c);
+        case "Wrapper":
+          return W.gc(c)
+      }
+    }
+  }
+}, bc:function(a) {
+  if(a) {
+    var b = new hd;
+    b.beacons = new rd;
+    a = C(a);
+    for(var c = 0;c < a.length;c++) {
+      var d = a[c];
+      switch(d.nodeName) {
+        case "Survey":
+          b.surveyURL = W.d(d);
+          break;
+        case "Error":
+          b.beacons.add(Q.ta, W.d(d));
+          break;
+        case "Attempt":
+          b.beacons.add(Q.sa, W.d(d));
+          break;
+        case "Impression":
+          W.jb(d, b);
+          break;
+        case "Creatives":
+          W.gb(d, b);
+          break;
+        case "Extensions":
+          W.ib(d, b)
+      }
+    }
+    return b
+  }
+}, ib:function(a, b) {
+  a && u(C(a), function(a) {
+    if("Extension" == a.nodeName) {
+      switch(a.getAttribute("type")) {
+        case "adaptv_scripts":
+          W.ac(a, b);
+          break;
+        case "adaptv_iab_viewable_beacons":
+          W.$b(a, b)
+      }
+    }
+  })
+}, ac:function(a, b) {
+  a && u(C(a), function(a) {
+    b.T.scripts.push({src:W.d(a), type:a.getAttribute("resourceType")})
+  })
+}, $b:function(a, b) {
+  a && u(C(a), function(a) {
+    b.beacons.add(a.getAttribute("type"), W.d(a))
+  })
+}, jb:function(a, b) {
+  if(a) {
+    var c = W.d(a);
+    c && b.beacons.add(Q.yb, c)
+  }
+}, gb:function(a, b) {
+  if(a) {
+    b.b = [];
+    for(var c = C(a), d = 0;d < c.length;d++) {
+      var e = c[d];
+      "Creative" == e.nodeName && W.Zb(e, b)
+    }
+  }
+}, Zb:function(a, b) {
+  if(a) {
+    for(var c = C(a), d = 0;d < c.length;d++) {
+      var e = c[d];
+      switch(e.nodeName) {
+        case "Linear":
+          W.cc(e, b.b);
+          break;
+        case "CompanionAds":
+          var f = b, h;
+          h = e;
+          if("undefined" != typeof XMLSerializer) {
+            h = (new XMLSerializer).serializeToString(h)
+          }else {
+            if(h = h.xml, !h) {
+              throw Error("Your browser does not support serializing XML documents");
+            }
+          }
+          f.companionString = h;
+          if(e = C(e)) {
+            for(b.R = [], f = 0;f < e.length;f++) {
+              "Companion" == e[f].nodeName && W.Yb(e[f], b.R)
+            }
+          }
+      }
+    }
+  }
+}, cc:function(a, b) {
+  if(a) {
+    var c = new jd;
+    c.beacons = new rd;
+    c.skipoffset = a.getAttribute("skipoffset");
+    for(var d = C(a), e = 0;e < d.length;e++) {
+      var f = d[e];
+      switch(f.nodeName) {
+        case "Duration":
+          c.duration = W.d(f);
+          break;
+        case "TrackingEvents":
+          W.kb(f, c);
+          break;
+        case "VideoClicks":
+          W.fc(f, c);
+          break;
+        case "MediaFiles":
+          W.dc(f, c);
+          break;
+        case "AdParameters":
+          W.Wb(f, c)
+      }
+    }
+    b.push(c)
+  }
+}, Yb:function(a, b) {
+  if(a) {
+    var c = new td;
+    c.beacons = new rd;
+    c.companionSize = new sd(parseInt(a.getAttribute("width"), 10), parseInt(a.getAttribute("height"), 10));
+    for(var d = C(a), e = 0;e < d.length;e++) {
+      switch(d[e].nodeName) {
+        case "StaticResource":
+          c.resourceType = "static";
+          c.creativeType = d[e].getAttribute("creativeType");
+          c.creativeUrl = W.d(d[e]);
+          break;
+        case "IFrameResource":
+          c.resourceType = "iframe";
+          c.creativeType = "any";
+          c.creativeUrl = W.d(d[e]);
+          break;
+        case "HTMLResource":
+          c.resourceType = "html";
+          c.creativeType = "any";
+          c.htmlTag = W.d(d[e]);
+          break;
+        case "TrackingEvents":
+          W.kb(d[e], c);
+          break;
+        case "CompanionClickThrough":
+          c.clickThrough = W.d(d[e])
+      }
+    }
+    b.push(c)
+  }
+}, kb:function(a, b) {
+  if(a) {
+    for(var c = C(a), d = 0;d < c.length;d++) {
+      var e = c[d];
+      if("Tracking" == e.nodeName) {
+        var f = e.getAttribute("event");
+        if(0 <= ya(ab(Q), f)) {
+          var h = e.getAttribute("offset");
+          b.beacons.add(f, W.d(e), h)
+        }
+      }
+    }
+  }
+}, fc:function(a, b) {
+  if(a) {
+    for(var c = C(a), d = 0;d < c.length;d++) {
+      var e = c[d];
+      switch(e.nodeName) {
+        case "ClickThrough":
+          b.clickThrough = W.d(e);
+          break;
+        case "ClickTracking":
+          b.beacons.add(Q.wb, W.d(e))
+      }
+    }
+  }
+}, dc:function(a, b) {
+  if(a) {
+    b.mediaFiles = [];
+    for(var c = C(a), d = 0;d < c.length;d++) {
+      var e = c[d];
+      if("MediaFile" == e.nodeName) {
+        var f = new kd;
+        f.bitrate = e.getAttribute("bitrate");
+        f.delivery = e.getAttribute("delivery");
+        f.width = e.getAttribute("width");
+        f.height = e.getAttribute("height");
+        f.type = e.getAttribute("type");
+        f.apiFramework = e.getAttribute("apiFramework");
+        (e = W.d(e)) && (f.url = e);
+        b.mediaFiles.push(f)
+      }
+    }
+  }
+}, gc:function(a) {
+  if(a) {
+    var b = new id;
+    b.beacons = new rd;
+    a = C(a);
+    for(var c = 0;c < a.length;c++) {
+      var d = a[c];
+      switch(d.nodeName) {
+        case "VASTAdTagURI":
+          b.qa = W.d(d);
+          break;
+        case "Error":
+          b.beacons.add(Q.ta, W.d(d));
+          break;
+        case "Attempt":
+          b.beacons.add(Q.sa, W.d(d));
+          break;
+        case "Impression":
+          W.jb(d, b);
+          break;
+        case "Creatives":
+          W.gb(d, b);
+          break;
+        case "Extensions":
+          W.ib(d, b)
+      }
+    }
+    return b
+  }
+}, Wb:function(a, b) {
+  b.adParameters = W.d(a);
+  b.hasAdaptvParams = a.id && "adaptv" === a.id.toLowerCase()
+}, d:function(a) {
+  return pa(a.textContent || a.text || "")
+}};
+var X = {};
+X[Ec.errorCode] = 101;
+X[Fc.errorCode] = 403;
+X[Gc.errorCode] = 302;
+X[Hc.errorCode] = 901;
+X[Ic.errorCode] = 403;
+X[Jc.errorCode] = 901;
+X[Kc.errorCode] = 901;
+X[Lc.errorCode] = 900;
+X[Mc.errorCode] = 900;
+X[Nc.errorCode] = 300;
+X[Oc.errorCode] = 901;
+X[Pc.errorCode] = 901;
+X[Qc.errorCode] = 901;
+X[Rc.errorCode] = 901;
+X[Sc.errorCode] = 901;
+X[Tc.errorCode] = 900;
+X[Uc.errorCode] = 300;
+X[Vc.errorCode] = 901;
+X[Wc.errorCode] = 901;
+X[Xc.errorCode] = 100;
+X[Yc.errorCode] = 301;
+X[Zc.errorCode] = 101;
+X[$c.errorCode] = 101;
+X[ad.errorCode] = 303;
+X[bd.errorCode] = 405;
+X[cd.errorCode] = 900;
+X[dd.errorCode] = 400;
+function Y() {
+  this.e = [];
+  this.Y = [];
+  this.La = !1;
+  this.g = Hd("adaptv.vpaid.AdSource")
+}
+Y.prototype.init = function(a, b, c) {
+  this.P = a;
+  this.xa = c || g();
+  this.Ma = b;
+  this.v = 0;
+  a = new fe(this.P, 0, 1E4);
+  Vb(a, ["done", "error"], function(a) {
+    ge(this, a.data, a.type)
+  }, !1, this);
+  a.na()
+};
+Y.prototype.Rb = function(a, b, c) {
+  this.xa = c || g();
+  this.Ma = b;
+  this.v = 0;
+  a = W.hb(ee(a));
+  W.error ? Z(this, W.error) : ge(this, a)
+};
+function ge(a, b, c) {
+  if(b && b.l && b.l.length && "error" !== c) {
+    if(a.e = b.l[0], a.La = b.$, a.La) {
+      for(c = 0;c < a.e.length;c++) {
+        a.Y.push(new fd(a.e[c], a.Ma))
+      }
+    }else {
+      a.Y.push(new fd(a.e[0], a.Ma))
+    }
+  }
+  0 === b.error.errorCode ? a.ga() : Z(a, b.error)
+}
+Y.prototype.ga = function() {
+  if(this.v < this.e.length) {
+    var a = this.Y[this.v];
+    if(a && null !== (qd(a.n) instanceof hd ? qd(a.n) : null)) {
+      u(md(a.n, Q.sa), function(a) {
+        xc(a)
+      });
+      var b = he(this, a);
+      0 === b.error.errorCode ? (this.xa(b), this.v++) : Z(this, b.error)
+    }else {
+      a.depth > a.n.size() ? (b = qd(a.n), b = new fe(b ? b.qa : "", a.depth, 1E4), Vb(b, ["done", "error"], function(b) {
+        var d = b.data;
+        if(d && d.l && d.l.length) {
+          for(var e = 0;e < d.l.length;e++) {
+            if(!d.l[e] || !d.l[e].length) {
+              W.error ? Z(this, W.error) : Z(this, Ec);
+              return
+            }
+            a.n.push(d.l[e][0])
+          }
+          0 === d.error.errorCode ? this.ga() : Z(this, b.data.error)
+        }else {
+          W.error ? Z(this, W.error) : Z(this, Ec)
+        }
+      }, !1, this), b.na()) : Z(this, Gc)
+    }
+  }else {
+    Z(this, Hc)
+  }
+};
+function Z(a, b) {
+  a.g.info(b.errorMessage);
+  a.v < a.Y.length && u(md(a.Y[a.v].n, Q.ta), function(a) {
+    if(zc(a)) {
+      a = new Dc(a);
+      var c = b.errorCode;
+      L(a);
+      a.i.set("errNo", c);
+      c = X[b.errorCode] ? X[b.errorCode] : b.errorCode;
+      L(a);
+      a.i.set("errorCode", c);
+      a = a.Ia()
+    }
+    xc(a)
+  });
+  a.v++;
+  if(a.La && 9500 > b.errorCode && a.v < a.Y.length) {
+    a.ga()
+  }else {
+    var c = new ld;
+    c.error = b;
+    a.xa(c)
+  }
+}
+function he(a, b) {
+  var c = qd(b.n) instanceof hd ? qd(b.n) : null, d = new ld, e = c.b && c.b.length ? c.b[0].mediaFiles : [];
+  if(e && e.length) {
+    for(var f = 0;f < e.length;f++) {
+      if("application/x-shockwave-flash" === e[f].type && yc()) {
+        d.mediaFiles = [e[f]];
+        d.isVPAID = !0;
+        break
+      }
+      if(e[f].apiFramework && "vpaid" === e[f].apiFramework.toLowerCase() && ("text/javascript" === e[f].type || "application/x-javascript" === e[f].type || "application/javascript" === e[f].type)) {
+        d.mediaFiles = [e[f]];
+        d.isVPAID = !0;
+        break
+      }
+      Ac(e[f]) && d.mediaFiles.push(e[f])
+    }
+  }
+  if(!d.mediaFiles || 0 === d.mediaFiles.length) {
+    for(f = 0;f < e.length;f++) {
+      if("video/x-flv" === e[f].type && yc()) {
+        d.mediaFiles = [e[f]];
+        d.isFLV = !0;
+        break
+      }
+    }
+  }
+  if(!d.mediaFiles.length) {
+    return d.error = Fc, d
+  }
+  d.isVPAID || d.mediaFiles.sort(function(a, b) {
+    return a.bitrate - b.bitrate
+  });
+  d.mediaFile = d.mediaFiles[0];
+  d.adListIndex = a.v;
+  d.adListSize = a.e.length;
+  d.adParameters = nd(b.n);
+  d.beacons = od(b.n);
+  d.clickThrough = c.b[0].clickThrough;
+  d.companionString = c.companionString;
+  d.companions = [];
+  d.duration = c.b[0].duration;
+  d.hasAdaptvParams = c.b[0].hasAdaptvParams;
+  d.scripts = pd(b.n);
+  d.skipoffset = c.b[0].skipoffset;
+  d.surveyURL = c.surveyURL;
+  for(f = 0;f < c.R.length;f++) {
+    c.R[f].valid && (e = c.R[f], e.normalize(), e.beacons = e.beacons.beaconsForEvent[Q.Sa], d.companions.push(e))
+  }
+  return d
+}
+;function ie() {
+  this.lb = ka()
+}
+var ke = new ie;
+ie.prototype.set = function(a) {
+  this.lb = a
+};
+ie.prototype.reset = function() {
+  this.set(ka())
+};
+ie.prototype.get = aa("lb");
+function le(a) {
+  this.ic = a || "";
+  this.pc = ke
+}
+k = le.prototype;
+k.Ib = !0;
+k.pb = !0;
+k.nc = !0;
+k.mc = !0;
+k.qb = !1;
+k.oc = !1;
+function $(a) {
+  return 10 > a ? "0" + a : String(a)
+}
+function me(a, b) {
+  var c = (a.rb - b) / 1E3, d = c.toFixed(3), e = 0;
+  if(1 > c) {
+    e = 2
+  }else {
+    for(;100 > c;) {
+      e++, c *= 10
+    }
+  }
+  for(;0 < e--;) {
+    d = " " + d
+  }
+  return d
+}
+function ne(a) {
+  le.call(this, a)
+}
+s(ne, le);
+function oe() {
+  this.jc = q(this.Hb, this);
+  this.Ga = new ne;
+  this.Ga.pb = !1;
+  this.Za = this.Ga.qb = !1;
+  this.ab = "";
+  this.Lb = {}
+}
+oe.prototype.Hb = function(a) {
+  if(!this.Lb[a.bb]) {
+    var b;
+    b = this.Ga;
+    var c = [];
+    c.push(b.ic, " ");
+    if(b.pb) {
+      var d = new Date(a.rb);
+      c.push("[", $(d.getFullYear() - 2E3) + $(d.getMonth() + 1) + $(d.getDate()) + " " + $(d.getHours()) + ":" + $(d.getMinutes()) + ":" + $(d.getSeconds()) + "." + $(Math.floor(d.getMilliseconds() / 10)), "] ")
+    }
+    b.nc && c.push("[", me(a, b.pc.get()), "s] ");
+    b.mc && c.push("[", a.bb, "] ");
+    b.oc && c.push("[", a.M.name, "] ");
+    c.push(a.cb);
+    b.qb && a.Fa && c.push("\n", a.Ea);
+    b.Ib && c.push("\n");
+    b = c.join("");
+    if(c = pe) {
+      switch(a.M) {
+        case wd:
+          qe(c, "info", b);
+          break;
+        case xd:
+          qe(c, "error", b);
+          break;
+        case yd:
+          qe(c, "warn", b);
+          break;
+        default:
+          qe(c, "debug", b)
+      }
+    }else {
+      window.opera ? window.opera.postError(b) : this.ab += b
+    }
+  }
+};
+var pe = window.console;
+function qe(a, b, c) {
+  if(a[b]) {
+    a[b](c)
+  }else {
+    a.log(c)
+  }
+}
+;r("__adaptv__.debug.configure", function(a, b) {
+  Hd(a).Pa(b || Cd);
+  var c = new oe;
+  !0 != c.Za && (Gd(), Fd.wa(c.jc), c.Za = !0)
+});
+r("__adaptv__.debug.log", function(a) {
+  Hd("adaptv.page").info(a)
+});
+r("__adaptv__.vpaid.AdSource", Y);
+r("__adaptv__.vpaid.AdSource.prototype.init", Y.prototype.init);
+r("__adaptv__.vpaid.AdSource.prototype.initXML", Y.prototype.Rb);
+r("__adaptv__.vpaid.AdSource.prototype.getNextAd", Y.prototype.ga);
+})();
