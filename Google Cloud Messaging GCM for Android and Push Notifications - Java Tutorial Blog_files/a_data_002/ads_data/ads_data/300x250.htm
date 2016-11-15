@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>Tourism Australia</title>
+<!--Adobe Edge Runtime-->
+    <script src="300x250_data/300x250_edge.js"></script><script type="text/javascript" charset="utf-8" src="300x250_data/edge.js"></script>
+    <script type="text/javascript">	var clickTag = "http://www.google.com";</script>
+    <style>
+        .edgeLoad-EDGE-10002709 { visibility:hidden; }
+    </style>
+<script>
+   AdobeEdge.loadComposition('300x250', 'EDGE-10002709', {
+    scaleToFit: "none",
+    centerStage: "none",
+    minW: "0px",
+    maxW: "undefined",
+    width: "300px",
+    height: "250px"
+}, {"dom":{}}, {"dom":{}});
+</script>
+<!--Adobe Edge Runtime End-->
+
+<script type="text/javascript">
+    
+      (function() {
+        var relegateNavigation = '';
+        var handleClickTagMessage = function(e) {
+          try {
+            var eventData = JSON.parse(e.data);
+          } catch (err) {
+            return;
+          }
+          if (eventData.isInitClickTag) {
+            if (eventData.clickTags) {
+              for (var i = 0; i < eventData.clickTags.length; i++) {
+                var clkTag = eventData.clickTags[i];
+                window[clkTag.name] = clkTag.url;
+              }
+            } else if (eventData.clickTag) {
+              window.clickTag = eventData.clickTag;
+            }
+            relegateNavigation = eventData.relegateNavigation;
+          }
+        };
+
+        if (open.call) {
+          window.open = function(open) {
+            return function(url, name, features) {
+              if (relegateNavigation === 'parent') {
+                var message = {'clickTag': url, 'isPostClickTag': true};
+                parent.postMessage(JSON.stringify(message), '*');
+              } else {
+                var args = [url, name];
+                if (features) {
+                  args.push(features);
+                }
+                open.apply(window, args);
+              }
+            };
+          }(window.open);
+        }
+
+        if (window.addEventListener) {
+          window.addEventListener(
+              'message', handleClickTagMessage, false);
+        } else {
+          window.attachEvent('onmessage', handleClickTagMessage);
+        }
+      })();
+    
+  </script></head>
+<body style="margin:0;padding:0;">
+	<div id="Stage" class="EDGE-10002709" style="position: relative; height: 250px; width: 300px; z-index: 0; right: auto; bottom: auto; background-color: rgb(255, 255, 255); overflow: hidden; text-overflow: clip; background-size: 100% 100%;">
+	<div id="Stage_img" style="position: absolute; margin: 0px; left: 0px; top: 0px; width: 300px; height: 250px; right: auto; bottom: auto; background-image: url(&quot;images/img300x250.jpg&quot;); background-color: transparent; background-repeat: no-repeat; background-size: 100% 100%; background-position: 0px 0px; transform: translateZ(0px);" class="Stage_img_id"></div><div id="Stage_logo" style="position: absolute; margin: 0px; opacity: 1; left: 235px; top: 17px; width: 55px; height: 54px; right: auto; bottom: auto; background-image: url(&quot;images/logo300x250.png&quot;); background-color: transparent; background-repeat: no-repeat; background-size: 100% 100%; display: block; background-position: 0px 0px; transform: translateZ(0px);" class="Stage_logo_id"></div><div id="Stage_tagline1" style="position: absolute; margin: 0px; opacity: 0.129332; left: 0px; top: 0px; width: 164px; height: 53px; right: auto; bottom: auto; background-image: url(&quot;images/tagline1x300x250.png&quot;); background-color: transparent; background-repeat: no-repeat; background-size: 100% 100%; display: block; background-position: 0px 0px; transform: translate(1.55198px, 17px) rotate(0deg) scale(1, 1);" class="Stage_tagline1_id"></div><div id="Stage_tagline2" style="position: absolute; margin: 0px; opacity: 0; left: 0px; top: 0px; width: 147px; height: 53px; right: auto; bottom: auto; background-image: url(&quot;images/tagline2x300x250.png&quot;); background-color: transparent; background-repeat: no-repeat; background-size: 100% 100%; display: none; background-position: 0px 0px; transform: translate(0px, 17px) rotate(0deg) scale(1, 1);" class="Stage_tagline2_id"></div><div id="Stage_rectangle" style="position: absolute; margin: 0px; opacity: 0; left: 0px; top: 172px; width: 300px; height: 78px; right: auto; bottom: auto; background-color: rgb(255, 255, 255); background-size: 100% 100%; display: none; border-width: 0px; border-color: rgb(0, 0, 0); border-style: none; transform: translateZ(0px);" class="Stage_rectangle_id"></div><div id="Stage_offer300x250" style="position: absolute; margin: 0px; opacity: 0; left: 60px; top: 181px; width: 180px; height: 60px; right: auto; bottom: auto; background-image: url(&quot;images/offer300x250.png&quot;); background-color: transparent; background-repeat: no-repeat; background-size: 100% 100%; display: none; background-position: 0px 0px; transform: translateZ(0px);" class="Stage_offer300x250_id"></div><div id="Stage_tc" style="position: absolute; margin: 0px; opacity: 1; left: 247px; top: 237px; width: 52px; height: 12px; right: auto; bottom: auto; display: none; font-family: Verdana,Geneva,sans-serif; font-size: 8px; font-weight: 400; color: rgb(0, 0, 0); text-decoration: none rgb(255, 255, 255); font-style: normal; overflow-wrap: break-word; text-align: left; white-space: normal; transform: translateZ(0px);" class="Stage_tc_id"><p style="margin: 0px;">*T&amp;C Apply​</p></div><div id="Stage_click" style="position: absolute; margin: 0px; left: 0px; top: 0px; width: 298px; height: 248px; right: auto; bottom: auto; background-color: rgba(192, 192, 192, 0); background-size: 100% 100%; border-width: 1px; border-color: rgb(0, 0, 0); border-style: solid; cursor: pointer; transform: translateZ(0px);" class="Stage_click_id"></div><div id="Stage_replay" style="position: absolute; margin: 0px; opacity: 1; left: 286px; top: 3px; width: 12px; height: 12px; right: auto; bottom: auto; background-image: url(&quot;images/replay.png&quot;); background-color: transparent; background-repeat: no-repeat; background-size: 100% 100%; display: none; cursor: pointer; background-position: 0px 0px; transform: translateZ(0px);" class="Stage_replay_id"></div></div>
+
+</body></html>
